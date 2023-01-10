@@ -1,45 +1,77 @@
 package gregicality.science.loaders.recipe;
 
 import gregicality.science.loaders.recipe.chain.*;
-import gregicality.science.loaders.recipe.circuits.BiowareCircuits;
+import gregicality.science.loaders.recipe.circuits.*;
+import gregicality.science.loaders.recipe.component.GCYSComponentRecipes;
 import gregicality.science.loaders.recipe.handlers.BouleRecipeHandler;
-import gregicality.science.loaders.recipe.vacuum.VacuumRecipes;
+import gregicality.science.loaders.recipe.oreprocessing.*;
 
 public class GCYSRecipeLoader {
 
     public static void init() {
-        initHandlers();
         initChains();
+        initOreProcessing();
         initCircuits();
+        MiscRecipes.init();
         RecipeConflicts.init();
-        VacuumRecipes.init();
+        GCYSComponentRecipes.init();
         GCYSMetaTileEntityLoader.init();
+        GCYSBlockRecipeLoader.init();
     }
 
-    private static void initHandlers() {
+    public static void initHandlers() {
         BouleRecipeHandler.register();
     }
 
     private static void initChains() {
-        CrystalCircuitChain.init();
-        RareEarthProcessing.init();
-        PlatinumGroupProcessing.init();
-        TungstenProcessing.init();
         GrapheneChain.init();
         HydrogenPeroxideChain.init();
-        NiobiumTantalumChain.init();
         AcetyleneChain.init();
         TurpentineChain.init();
         EDTAChain.init();
-        BiowareCellsChain.init();
+        EtchingMaterialsChain.init();
         OilProcessing.init();
         DimethylformamideChain.init();
         KaptonChain.init();
         AmmoniaChain.init();
-        MolybdenumChain.init();
+        BrineChain.init();
+        MethylamineChain.init();
+        KevlarChain.init();
+        BoronNitrideChain.init();
+        BZChain.init();
+        PhosphorusChain.init();
+        EthyleneGlycolChain.init();
+        PMMAChain.init();
+        GalliumNitrideChain.init();
+        PhotoresistivesChain.init();
+        MagneticsChain.init();
+        NanotubesChain.init();
+        IsotopesChain.init();
+        FullereneChain.init();
+        FantasyMaterials.init();
+        SimpleMaterials.init();
+        PedotChain.init();
+    }
+
+    private static void initOreProcessing() {
+        PlatinumGroupProcessing.init();
+        RareEarthProcessing.init();
+        TungstenProcessing.init();
+        GermaniumProcessing.init();
+        NiobiumTantalumChain.init();
+        SeleniumTelluriumChain.init();
+        MolybdenumProcessing.init();
+        ThalliumProcessing.init();
+        TaraniumProcessing.init();
+        RubidiumProcessing.init();
     }
 
     private static void initCircuits() {
-        BiowareCircuits.init();
+        PrimitiveCircuits.init();
+        CrystalCircuits.init();
+        WetwareCircuits.init();
+        GoowareCircuits.init();
+        OpticalCircuits.init();
+        SpintronicCircuits.init();
     }
 }

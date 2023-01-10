@@ -9,7 +9,7 @@ import gregtech.api.GTValues;
 import gregtech.api.capability.IHeatingCoil;
 import gregtech.api.capability.impl.HeatingCoilRecipeLogic;
 import gregtech.api.metatileentity.MetaTileEntity;
-import gregtech.api.metatileentity.MetaTileEntityHolder;
+import gregtech.api.metatileentity.interfaces.IGregTechTileEntity;
 import gregtech.api.metatileentity.multiblock.IMultiblockPart;
 import gregtech.api.metatileentity.multiblock.MultiblockAbility;
 import gregtech.api.metatileentity.multiblock.RecipeMapMultiblockController;
@@ -59,7 +59,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
     }
 
     @Override
-    public MetaTileEntity createMetaTileEntity(MetaTileEntityHolder holder) {
+    public MetaTileEntity createMetaTileEntity(IGregTechTileEntity holder) {
         return new MetaTileEntityCrystallizationCrucible(metaTileEntityId);
     }
 
@@ -67,7 +67,7 @@ public class MetaTileEntityCrystallizationCrucible extends RecipeMapMultiblockCo
     protected void addDisplayText(List<ITextComponent> textList) {
         if (isStructureFormed()) {
             textList.add(new TextComponentTranslation("gregtech.multiblock.blast_furnace.max_temperature",
-                    new TextComponentTranslation(GTUtility.formatNumbers(temperature) + "K").setStyle(new Style().setColor(TextFormatting.RED))));
+                    TextFormatting.RED + GTUtility.formatNumbers(temperature) + "K"));
         }
         super.addDisplayText(textList);
     }

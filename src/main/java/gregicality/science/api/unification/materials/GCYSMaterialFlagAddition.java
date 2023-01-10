@@ -1,11 +1,12 @@
 package gregicality.science.api.unification.materials;
 
 import gregicality.science.common.GCYSConfigHolder;
-import gregtech.api.unification.material.info.MaterialFlags;
+import gregtech.api.unification.material.properties.OreProperty;
+import gregtech.api.unification.material.properties.PropertyKey;
 
 import static gregicality.science.api.unification.material.info.GCYSMaterialFlags.DISABLE_CRYSTALLIZATION;
 import static gregtech.api.unification.material.Materials.*;
-import static gregtech.api.unification.material.info.MaterialFlags.CRYSTALLIZABLE;
+import static gregtech.api.unification.material.info.MaterialFlags.*;
 
 public class GCYSMaterialFlagAddition {
 
@@ -14,23 +15,23 @@ public class GCYSMaterialFlagAddition {
         // Formula Changes
         PalladiumRaw.setFormula("PdCl2", true);
         RarestMetalMixture.setFormula("IrOs?", true);
-        AcidicOsmiumSolution.setFormula("OsO4(HCl)", true);
-        IridiumMetalResidue.setFormula("Ir?", true);
+        IridiumMetalResidue.setFormula("Ir2O3", true);
 
         // Disable Decomposition
-        if (GCYSConfigHolder.chainOverrides.disablePlatinumProcessing) {
-            SulfuricCopperSolution.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
-            SulfuricNickelSolution.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
-        }
         if (GCYSConfigHolder.chainOverrides.disableNiobiumTantalumProcessing) {
-            Pyrochlore.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
-            Tantalite.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
+            Pyrochlore.addFlags(DISABLE_DECOMPOSITION);
+            Tantalite.addFlags(DISABLE_DECOMPOSITION);
         }
-        if (GCYSConfigHolder.chainOverrides.disableMolybdenumExtraction) {
-            Molybdenite.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
-            Powellite.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
-            Wulfenite.addFlags(MaterialFlags.DISABLE_DECOMPOSITION);
+        if (GCYSConfigHolder.chainOverrides.disableMolybdenumProcessing) {
+            Molybdenite.addFlags(DISABLE_DECOMPOSITION);
+            OreProperty oreProp = Molybdenite.getProperty(PropertyKey.ORE);
+            oreProp.setDirectSmeltResult(null);
+            Powellite.addFlags(DISABLE_DECOMPOSITION);
+            Wulfenite.addFlags(DISABLE_DECOMPOSITION);
         }
+        RockSalt.addFlags(DISABLE_DECOMPOSITION); // Conflict between Potassium Hydroxide and Rock Salt Electrolysis
+        Salt.addFlags(DISABLE_DECOMPOSITION); // Conflict between Sodium Chlorate and Salt Electrolysis
+        Pollucite.addFlags(DISABLE_DECOMPOSITION); // for rubidium chain
 
         // Disable Crystallization
         Monazite.addFlags(DISABLE_CRYSTALLIZATION);
@@ -43,10 +44,26 @@ public class GCYSMaterialFlagAddition {
         Amethyst.addFlags(CRYSTALLIZABLE);
         Opal.addFlags(CRYSTALLIZABLE);
 
+        // Plates
+        Germanium.addFlags(GENERATE_PLATE);
+        Rhenium.addFlags(GENERATE_PLATE);
+
         // Rods
-        Darmstadtium.addFlags(MaterialFlags.GENERATE_ROD);
+        Darmstadtium.addFlags(GENERATE_ROD);
+
+        // Springs
+        Trinium.addFlags(GENERATE_SPRING);
+        Tritanium.addFlags(GENERATE_SPRING);
+
+        // Small Springs
+        Europium.addFlags(GENERATE_SPRING_SMALL);
 
         // Frames
-        Darmstadtium.addFlags(MaterialFlags.GENERATE_FRAME);
+        Darmstadtium.addFlags(GENERATE_FRAME);
+
+        // Foils
+        Nickel.addFlags(GENERATE_FOIL);
+        Titanium.addFlags(GENERATE_FOIL);
+        Germanium.addFlags(GENERATE_FOIL);
     }
 }

@@ -19,7 +19,7 @@ public class TurpentineChain {
 
     public static void init() {
         CHEMICAL_RECIPES.recipeBuilder()
-                .inputs(getWoodLogs())
+                .inputStacks(getWoodLogs())
                 .fluidInputs(Naphtha.getFluid(1000))
                 .fluidOutputs(LeachedTurpentine.getFluid(1000))
                 .duration(80).EUt(VA[HV]).buildAndRegister();
@@ -28,7 +28,7 @@ public class TurpentineChain {
                 .fluidInputs(Steam.getFluid(1000))
                 .fluidInputs(LeachedTurpentine.getFluid(1000))
                 .fluidOutputs(SteamCrackedTurpentine.getFluid(1000))
-                .duration(40).EUt(240).buildAndRegister();
+                .duration(80).EUt(240).buildAndRegister();
 
         DISTILLATION_RECIPES.recipeBuilder()
                 .fluidInputs(SteamCrackedTurpentine.getFluid(1000))

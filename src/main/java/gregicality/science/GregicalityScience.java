@@ -1,5 +1,6 @@
 package gregicality.science;
 
+import gregicality.science.api.capability.GCYSTileCapabilities;
 import gregicality.science.api.utils.GCYSLog;
 import gregicality.science.common.CommonProxy;
 import gregicality.science.common.block.GCYSMetaBlocks;
@@ -8,6 +9,7 @@ import gregicality.science.common.metatileentities.GCYSMetaTileEntities;
 import gregtech.api.GTValues;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import javax.annotation.Nonnull;
@@ -26,11 +28,18 @@ public class GregicalityScience {
     public static CommonProxy proxy;
 
     @Mod.EventHandler
+    public void onModConstruction(FMLConstructionEvent event) {
+        GTValues.HT = true;
+    }
+
+    @Mod.EventHandler
     public void onPreInit(@Nonnull FMLPreInitializationEvent event) {
         GCYSLog.init(event.getModLog());
 
+        GCYSTileCapabilities.init();
+
+        GCYSMetaItems.initMetaItems();
         GCYSMetaBlocks.init();
-        GCYSMetaItems.init();
         GCYSMetaTileEntities.init();
 
         proxy.preLoad();
